@@ -19,6 +19,7 @@
                 <th>ID</th>
                 <th>Nombre del libro</th>
                 <th>Cantidad</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -27,6 +28,22 @@
                 <td>{{ $libro->id }}</td>
                 <td>{{ $libro->name }}</td>
                 <td>{{ $libro->cantidad }}</td>
+                <td>   
+                    
+                    <a href="{{ route('libros.edit', $libro->id) }}" class="btn btn-warning btn-sm">
+                    Editar
+                </a>
+
+
+                 <!-- Botón para eliminar el libro -->
+                 <form action="{{ route('libros.destroy', $libro->id) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar este libro?')">
+                        Eliminar
+                    </button>
+                </form>
+             </td>
             </tr>
             @endforeach
         </tbody>

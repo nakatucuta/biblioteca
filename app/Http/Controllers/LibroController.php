@@ -69,7 +69,7 @@ class LibroController extends Controller
      */
     public function edit(Libro $libro)
     {
-        //
+        return view('libros.edit', compact('libro'));
     }
 
     /**
@@ -77,14 +77,30 @@ class LibroController extends Controller
      */
     public function update(Request $request, Libro $libro)
     {
-        //
-    }
+        // Validar los datos del formulario
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'cantidad' => 'required|integer|min:1',
+        ]);
 
+        // Actualizar el libro con los datos del formulario
+        $libro->update([
+            'name' => $request->input('name'),
+            'cantidad' => $request->input('cantidad'),
+        ]);
+
+        // Redirigir a la lista de libros con un mensaje de éxito
+        return redirect()->route('dashboard')->with('success', 'Libro actualizado exitosamente.');
+    }
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Libro $libro)
     {
-        //
+       // Eliminar el libro
+       $libro->delete();
+
+       // Redirigir a la lista de libros con un mensaje de éxito
+       return redirect()->route('dashboard')->with('success', 'Libro eliminado exitosamente.');
     }
 }
