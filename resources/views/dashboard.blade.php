@@ -3,6 +3,10 @@
 @section('title', 'Lista de Libros')
 
 @section('content')
+
+
+@include('libros.mensajes') <!-- Incluir la vista de mensajes flash aquí -->
+
     <!-- Botón estilo Bootstrap -->
     <div class="mb-4">
         <a href="{{ route('libros.create') }}">
