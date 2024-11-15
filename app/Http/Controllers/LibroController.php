@@ -99,6 +99,7 @@ class LibroController extends Controller
     {
        // Eliminar el libro
        $libro->delete();
+       
 
        // Redirigir a la lista de libros con un mensaje de éxito
        return redirect()->route('dashboard')->with('error', 'Libro eliminado exitosamente.');
